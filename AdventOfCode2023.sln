@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trebuchet", "Trebuchet\Trebuchet.csproj", "{1BFF9DAB-F871-4458-B952-96C6FAFA36CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventTest", "AdventTest\AdventTest.csproj", "{499FD414-375B-4E71-9CB4-14C3CFA07874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BFF9DAB-F871-4458-B952-96C6FAFA36CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BFF9DAB-F871-4458-B952-96C6FAFA36CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BFF9DAB-F871-4458-B952-96C6FAFA36CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BFF9DAB-F871-4458-B952-96C6FAFA36CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499FD414-375B-4E71-9CB4-14C3CFA07874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499FD414-375B-4E71-9CB4-14C3CFA07874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499FD414-375B-4E71-9CB4-14C3CFA07874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499FD414-375B-4E71-9CB4-14C3CFA07874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83580AC8-EFAC-4ED0-A772-F6B94587DCA0}
+	EndGlobalSection
+EndGlobal
