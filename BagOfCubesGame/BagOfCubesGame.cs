@@ -23,7 +23,7 @@ public static class BagOfCubesGame {
             && blueCount <= bag.BlueCount;
 
         int GetMatchingCount(string color) {
-            var regex = new Regex($"(?'number'[0123456789]+)\\s+(?:{color})");
+            var regex = new Regex($"(?'number'[0123456789]+)\\s+{color}");
             int.TryParse(regex.Match(@this).Groups["number"].Value, out var count);
             return count;
         }
