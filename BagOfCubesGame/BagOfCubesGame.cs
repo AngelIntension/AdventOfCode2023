@@ -33,29 +33,24 @@ public static class BagOfCubesGame {
 
         return redCount <= bag.RedCount
             && greenCount <= bag.GreenCount
-            && blueCount <= bag.BlueCount;
-    }
+            && blueCount <= bag.BlueCount; }
 
     private static int GetColorCount(this string @this, string color) {
         var regex = new Regex($"(?'number'[0123456789]+)\\s+{color}");
         int.TryParse(regex.Match(@this).Groups["number"].Value, out var count);
-        return count;
-    }
+        return count; }
 }
 
 public record struct BagOfCubesGameState(string TurnsList, BagState Bag) {
     public string TurnsList { get; init; } = TurnsList.Trim().ToLower();
-    public BagState Bag { get; init; } = Bag;
-}
+    public BagState Bag { get; init; } = Bag; }
 
 public record struct BagState(int RedCount, int GreenCount, int BlueCount) {
     public int RedCount { get; init; } = RedCount;
     public int GreenCount { get; init; } = GreenCount;
-    public int BlueCount { get; init; } = BlueCount;
-}
+    public int BlueCount { get; init; } = BlueCount; }
 
 public record struct BagPower(int Value) {
     public int Value { get; init; } = Value;
     public static implicit operator int(BagPower power) => power.Value;
-    public static implicit operator BagPower(int value) => new(value);
-}
+    public static implicit operator BagPower(int value) => new(value); }
