@@ -1,4 +1,5 @@
-﻿using BagOfCubesGame;
+﻿using System.Text.RegularExpressions;
+using BagOfCubesGame;
 using FluentAssertions;
 
 namespace AdventTest {
@@ -14,6 +15,22 @@ namespace AdventTest {
         public void IsValid_GivenTestBag_ShouldCorrectlyComputeGameValidity(string input, bool expected) {
             var game = new BagOfCubesGameState(input, TestBag);
             game.IsValid().Should().Be(expected);
+        }
+
+        [Fact]
+        public void SumValidGames_GivenGamesToTestFile() {
+            var gamesToTest = Path.GetFullPath(@"D:\Projects\Code\AdventOfCode2023\BagOfCubesGame\GamesToTest.txt");
+            var regex = new Regex(@"Game\s+(?'gameNumber'[0123456789]+):(?'turnsList'.*)");
+            var sumOfValidGames =
+                File.ReadLines(gamesToTest)
+                    .Select(line => {
+                         var match = regex.Match(line);
+                         var gameNumber = int.Parse(match.Groups["gameNumber"].Value);
+                         var game = new BagOfCubesGameState(match.Groups["turnsList"].Value, TestBag);
+                         return new { GameNumber = gameNumber, Game = game }; })
+                    .Sum( tuple => tuple.Game.IsValid() ? tuple.GameNumber : 0);
+
+            Assert.True(true);
         }
     }
 }

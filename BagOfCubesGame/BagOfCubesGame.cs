@@ -6,7 +6,7 @@ public static class BagOfCubesGame {
     public static bool IsValid(this BagOfCubesGameState @this)
         => @this.TurnsList
                 .Split(';')
-                .Select(turn => new BagOfCubesGameState(turn.Trim(), @this.Bag))
+                .Select(turn => new BagOfCubesGameState(turn, @this.Bag))
                 .Select(game => game.TurnsList.IsValid(game.Bag))
                 .Aggregate((a, b) => a && b);
 
@@ -23,8 +23,8 @@ public static class BagOfCubesGame {
             && blueCount <= bag.BlueCount;
 
         int GetMatchingCount(string color) {
-            var colorPattern = $"(?'number'[0123456789]+)\\s+(?:{color})";
-            int.TryParse(new Regex(colorPattern).Match(@this).Groups["number"].Value, out var count);
+            var regex = new Regex($"(?'number'[0123456789]+)\\s+(?:{color})");
+            int.TryParse(regex.Match(@this).Groups["number"].Value, out var count);
             return count;
         }
     }
