@@ -13,9 +13,9 @@ public class TrebuchetTest {
     // ReSharper restore StringLiteralTypo
     public static void ToCalibration_GivenNoDigitsAsStrings_ShouldReturnCorrectCalibrationValue(
         string input, int expectedCalibrationValue) {
-        var calibration = new CalibrationString(input);
+        var calibrationString = new CalibrationString(input);
         var expectedCalibration = new Calibration(expectedCalibrationValue);
-        calibration.ToCalibration().Should().Be(expectedCalibration);
+        calibrationString.ToCalibration().Should().Be(expectedCalibration);
     }
 
     [Fact]
@@ -41,8 +41,8 @@ public class TrebuchetTest {
     // ReSharper restore StringLiteralTypo
     public static void ToCalibration_GivenDigitsAsStringsAndNumbers_ShouldReturnCorrectCalibrationValue(
         string input, int expectedCalibrationValue) {
-        var calibration = new CalibrationString(input);
+        var calibrationString = new CalibrationString(input);
         var expectedCalibration = new Calibration(expectedCalibrationValue);
-        calibration.ToCalibration().Should().Be(expectedCalibration);
+        calibrationString.ToCalibration().Should().Be(expectedCalibration);
     }
 }
