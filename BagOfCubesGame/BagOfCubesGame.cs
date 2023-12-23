@@ -26,14 +26,9 @@ public static class BagOfCubesGame {
     private static bool IsValid(this string @this, BagState bag) {
         if(@this.Contains(';')) {
             throw new ArgumentException("string must contain a single turn"); }
-
-        var redCount = @this.GetColorCount("red");
-        var greenCount = @this.GetColorCount("green");
-        var blueCount = @this.GetColorCount("blue");
-
-        return redCount <= bag.RedCount
-            && greenCount <= bag.GreenCount
-            && blueCount <= bag.BlueCount; }
+        return @this.GetColorCount("red") <= bag.RedCount
+            && @this.GetColorCount("green") <= bag.GreenCount
+            && @this.GetColorCount("blue") <= bag.BlueCount; }
 
     private static int GetColorCount(this string @this, string color) {
         var regex = new Regex($"(?'number'[0123456789]+)\\s+{color}");
