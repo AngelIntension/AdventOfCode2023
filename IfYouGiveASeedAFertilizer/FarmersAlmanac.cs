@@ -1,11 +1,26 @@
 ﻿using System.Collections.Immutable;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
+
+[assembly: InternalsVisibleTo("AdventTest")]
 
 namespace IfYouGiveASeedAFertilizer; 
 
 public static class FarmersAlmanac {
-    public static Func<int, int> CreateMap(this Almanac @this, string mapName) {
+    public static BigInteger GetLocationFor(this Almanac @this, BigInteger seed)
+        => Maybe.From(seed)
+                .Map(@this.SeedToSoil)
+                .Map(@this.SoilToFertilizer)
+                .Map(@this.FertilizerToWater)
+                .Map(@this.WaterToLight)
+                .Map(@this.LightToTemperature)
+                .Map(@this.TemperatureToHumidity)
+                .Map(@this.HumidityToLocation)
+                .Value;
+
+    internal static Func<BigInteger, BigInteger> CreateMap(this Almanac @this, string mapName) {
         var almanacMaps = @this.AlmanacMaps.Where(map => map.MapName == mapName).ToImmutableArray();
         return a => Maybe.From(almanacMaps)
                          .Bind(maps => {
@@ -26,7 +41,7 @@ public static class FarmersAlmanac {
 }
 
 public record struct Almanac {
-    public ImmutableHashSet<AlmanacMap> AlmanacMaps { get; init; }
+    public ImmutableHashSet<BigInteger> Seeds { get; init; }
 
     public Almanac(string text) {
         var lines = text.Split('\n')
@@ -36,7 +51,27 @@ public record struct Almanac {
         AlmanacMaps = lines.GetMapNames()
                            .SelectMany(mapName => GetAlmanacMaps(lines, mapName))
                            .ToImmutableHashSet();
+        SeedToSoil = this.CreateMap("seed-to-soil");
+        SoilToFertilizer = this.CreateMap("soil-to-fertilizer");
+        FertilizerToWater = this.CreateMap("fertilizer-to-water");
+        WaterToLight = this.CreateMap("water-to-light");
+        LightToTemperature = this.CreateMap("light-to-temperature");
+        TemperatureToHumidity = this.CreateMap("temperature-to-humidity");
+        HumidityToLocation = this.CreateMap("humidity-to-location");
+        Seeds = lines.First().Split(' ')
+                     .Skip(1)
+                     .Select(BigInteger.Parse)
+                     .ToImmutableHashSet();
     }
+
+    internal ImmutableHashSet<AlmanacMap> AlmanacMaps { get; init; }
+    internal Func<BigInteger, BigInteger> SeedToSoil { get; init; }
+    internal Func<BigInteger, BigInteger> SoilToFertilizer { get; init; }
+    internal Func<BigInteger, BigInteger> FertilizerToWater { get; init; }
+    internal Func<BigInteger, BigInteger> WaterToLight { get; init; }
+    internal Func<BigInteger, BigInteger> LightToTemperature { get; init; }
+    internal Func<BigInteger, BigInteger> TemperatureToHumidity { get; init; }
+    internal Func<BigInteger, BigInteger> HumidityToLocation { get; init; }
 
     internal static ImmutableHashSet<AlmanacMap> GetAlmanacMaps(IEnumerable<string> lines, string mapName) {
         var mapNameRegex = new Regex(@"(?'mapName'\w+-to-\w+)\s+map:");
@@ -51,12 +86,12 @@ public record struct Almanac {
               .TakeWhile(line => mapRangeRegex.IsMatch(line))
               .Select(mapRange => {
                    var match = mapRangeRegex.Match(mapRange);
-                   var sourceStartIndex = int.Parse(match.Groups["sourceStartIndex"].Value);
-                   var destinationStartIndex = int.Parse(match.Groups["destinationStartIndex"].Value);
-                   var count = int.Parse(match.Groups["count"].Value);
+                   var sourceStartIndex = BigInteger.Parse(match.Groups["sourceStartIndex"].Value);
+                   var destinationStartIndex = BigInteger.Parse(match.Groups["destinationStartIndex"].Value);
+                   var count = BigInteger.Parse(match.Groups["count"].Value);
                    return new AlmanacMap(mapName, sourceStartIndex, destinationStartIndex, count); })
               .ToImmutableHashSet();
     }
 }
 
-public record struct AlmanacMap(string MapName, int SourceStart, int DestinationStart, int Count);
+internal record struct AlmanacMap(string MapName, BigInteger SourceStart, BigInteger DestinationStart, BigInteger Count);

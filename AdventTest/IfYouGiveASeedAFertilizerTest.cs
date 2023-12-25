@@ -4,6 +4,7 @@ using IfYouGiveASeedAFertilizer;
 namespace AdventTest {
     public class IfYouGiveASeedAFertilizerTest {
         private static string TestAlmanacPath => @"D:\Projects\Code\AdventOfCode2023\AdventTest\TestAlmanac.txt";
+        private static string InputAlmanacPath => @"D:\Projects\Code\AdventOfCode2023\IfYouGiveASeedAFertilizer\InputAlmanac.txt";
 
         [Theory]
         [InlineData("seed-to-soil", 98, 50)]
@@ -21,6 +22,28 @@ namespace AdventTest {
             var almanac = new Almanac(almanacText);
             var map = almanac.CreateMap(mapName);
             map(input).Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData(79, 82)]
+        [InlineData(14, 43)]
+        [InlineData(55, 86)]
+        [InlineData(13, 35)]
+        public static void GetLocationFor_ShouldCorrectlyComputeMappedLocation(int seed, int expectedLocation) {
+            var almanacText = File.ReadAllText(Path.GetFullPath(TestAlmanacPath));
+            var almanac = new Almanac(almanacText);
+            almanac.GetLocationFor(seed).Should().Be(expectedLocation);
+        }
+
+        [Fact]
+        public static void ComputeNearestSeedLocationFromInputAlmanac() {
+            var almanacText = File.ReadAllText(Path.GetFullPath(InputAlmanacPath));
+            var almanac = new Almanac(almanacText);
+            // ReSharper disable once UnusedVariable
+            var nearestSeedLocation = almanac.Seeds
+                                             .Select(seed => almanac.GetLocationFor(seed))
+                                             .Min();
+            nearestSeedLocation.Should().Be(177942185);
         }
     }
 }
