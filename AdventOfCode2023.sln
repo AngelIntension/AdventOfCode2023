@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BagOfCubesGame", "BagOfCube
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GearRatio", "GearRatio\GearRatio.csproj", "{49EF0806-5777-4637-B473-B050A0E67FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScratchCards", "ScratchCards\ScratchCards.csproj", "{D26DF5DA-80CE-43A0-8901-293347A6A847}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScratchCards", "ScratchCards\ScratchCards.csproj", "{D26DF5DA-80CE-43A0-8901-293347A6A847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfYouGiveASeedAFertilizer", "IfYouGiveASeedAFertilizer\IfYouGiveASeedAFertilizer.csproj", "{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
