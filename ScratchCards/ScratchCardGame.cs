@@ -11,11 +11,11 @@ namespace ScratchCards
                    .ToImmutableArray();
 
         public static (int GameNumber, ScratchCardGameState Game) ParseGame(string line) {
-            const string pattern = @"Card\s+(?'gameNumber'[0123456789]):(?'winningNumbers'[\s0123456789]+)[|](?'playerNumbers'[\s0123456789]+)";
+            const string pattern = @"Card\s+(?'gameNumber'[0123456789]+):(?'winningNumbers'[\s0123456789]+)[|](?'playerNumbers'[\s0123456789]+)";
             var regex = new Regex(pattern);
             var match = regex.Match(line);
             var gameNumber = int.Parse(match.Groups["gameNumber"].Value);
-            var winningNumbers = match.Groups["winningNumbers"].Value.Trim().Split(' ').Select(int.Parse).ToImmutableHashSet();
+            var winningNumbers = match.Groups["winningNumbers"].Value.Trim().Split(' ').Where(str => str != string.Empty).Select(int.Parse).ToImmutableHashSet();
             var playerNumbers = match.Groups["playerNumbers"].Value.Trim().Split(' ').Where(str => str != string.Empty)
                                      .Select(int.Parse).ToImmutableHashSet();
             var game = new ScratchCardGameState(winningNumbers, playerNumbers);

@@ -4,7 +4,8 @@ using ScratchCards;
 
 namespace AdventTest {
     public class ScratchCardTest {
-        private static string TestCardsFilePath => @"D:\Projects\Code\AdventOfCode2023\AdventTest\TestScratchCards.txt";
+        private static string TestCardsFilepath => @"D:\Projects\Code\AdventOfCode2023\AdventTest\TestScratchCards.txt";
+        private static string InputFilepath => @"D:\Projects\Code\AdventOfCode2023\ScratchCards\Input.txt";
 
         [Theory]
         [InlineData("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53", 8)]
@@ -18,6 +19,15 @@ namespace AdventTest {
                            .Game
                            .Score()
                            .Should().Be(expectedScore);
+        }
+
+        [Fact]
+        public static void ComputeSumOfGameScoresFromInput() {
+            var sumOfGameScores = ScratchCardGame
+                                 .GetGamesFromFile(InputFilepath)
+                                 .Select(tuple => tuple.Game.Score())
+                                 .Sum();
+            Assert.True(false);
         }
     }
 }
