@@ -15,7 +15,7 @@ namespace AdventTest {
         [InlineData("soil-to-fertilizer", 15, 0)]
         [InlineData("soil-to-fertilizer", 52, 37)]
         [InlineData("soil-to-fertilizer", 0, 39)]
-        public static void CreateTransform_ShouldReturnClosure_WhichCorrectlyComputesTransforms(
+        public static void CreateMap_ShouldReturnClosure_WhichCorrectlyComputesMappings(
             string mapName, int input, int expected) {
             var almanacText = File.ReadAllText(Path.GetFullPath(TestAlmanacPath));
             var almanac = new Almanac(almanacText);

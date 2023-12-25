@@ -17,6 +17,12 @@ public static class FarmersAlmanac {
                               None: () => a,
                               Some: map => map.DestinationStart + (a - map.SourceStart));
     }
+
+    internal static ImmutableHashSet<string> GetMapNames(this IEnumerable<string> lines) {
+        var mapNameRegex = new Regex(@"(?'mapName'\w+-to-\w+)\s+map:");
+        return lines.Select(line => mapNameRegex.Match(line).Groups["mapName"].Value)
+                    .Where(mapName => mapName != string.Empty).ToImmutableHashSet();
+    }
 }
 
 public record struct Almanac {
@@ -27,15 +33,9 @@ public record struct Almanac {
                         .Select(line => line.Trim())
                         .Where(line => line != string.Empty)
                         .ToImmutableArray();
-        var mapNames = GetMapNames(lines);
-        AlmanacMaps = mapNames.SelectMany(mapName => GetAlmanacMaps(lines, mapName))
-                              .ToImmutableHashSet();
-    }
-
-    internal static ImmutableHashSet<string> GetMapNames(IEnumerable<string> mapDefinitions) {
-        var mapNameRegex = new Regex(@"(?'mapName'\w+-to-\w+)\s+map:");
-        return mapDefinitions.Select(line => mapNameRegex.Match(line).Groups["mapName"].Value)
-                             .Where(mapName => mapName != string.Empty).ToImmutableHashSet();
+        AlmanacMaps = lines.GetMapNames()
+                           .SelectMany(mapName => GetAlmanacMaps(lines, mapName))
+                           .ToImmutableHashSet();
     }
 
     internal static ImmutableHashSet<AlmanacMap> GetAlmanacMaps(IEnumerable<string> lines, string mapName) {
@@ -48,7 +48,8 @@ public record struct Almanac {
                    }
                    return mapNameRegex.Match(line).Groups["mapName"].Value != mapName; })
               .Skip(1)
-              .TakeWhile(line => mapRangeRegex.IsMatch(line)).Select(mapRange => {
+              .TakeWhile(line => mapRangeRegex.IsMatch(line))
+              .Select(mapRange => {
                    var match = mapRangeRegex.Match(mapRange);
                    var sourceStartIndex = int.Parse(match.Groups["sourceStartIndex"].Value);
                    var destinationStartIndex = int.Parse(match.Groups["destinationStartIndex"].Value);
