@@ -23,7 +23,7 @@ namespace ScratchCards
         }
 
         public static int Score(this ScratchCardGameState @this)
-            => (int)Math.Pow(2, @this.WinningNumbers.Intersect(@this.PlayerNumbers).Count - 1);
+            => @this.WinningNumbers.Intersect(@this.PlayerNumbers).Count;
     }
 
     public record struct ScratchCardGameState(ImmutableHashSet<int> WinningNumbers, ImmutableHashSet<int> PlayerNumbers) {
