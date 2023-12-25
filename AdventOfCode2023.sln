@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventTest", "AdventTest\Ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BagOfCubesGame", "BagOfCubesGame\BagOfCubesGame.csproj", "{CB0F9FA4-A1EC-4366-AE5D-BB02BFE023D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearRatio", "GearRatio\GearRatio.csproj", "{49EF0806-5777-4637-B473-B050A0E67FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GearRatio", "GearRatio\GearRatio.csproj", "{49EF0806-5777-4637-B473-B050A0E67FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScratchCards", "ScratchCards\ScratchCards.csproj", "{D26DF5DA-80CE-43A0-8901-293347A6A847}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{49EF0806-5777-4637-B473-B050A0E67FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49EF0806-5777-4637-B473-B050A0E67FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49EF0806-5777-4637-B473-B050A0E67FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26DF5DA-80CE-43A0-8901-293347A6A847}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
