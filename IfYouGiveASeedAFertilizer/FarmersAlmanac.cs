@@ -38,10 +38,24 @@ public static class FarmersAlmanac {
         return lines.Select(line => mapNameRegex.Match(line).Groups["mapName"].Value)
                     .Where(mapName => mapName != string.Empty).ToImmutableHashSet();
     }
+
+    internal static ImmutableHashSet<SeedRange> ParseSeedRanges(this string @this) {
+        var seedRangeRegex = new Regex(@"(?'start'\d+)\s+(?'count'\d+)(?'rest'.*)?");
+        var ranges = Enumerable.Empty<SeedRange>().ToImmutableHashSet();
+        var str = @this;
+        while (seedRangeRegex.IsMatch(str)) {
+            var match = seedRangeRegex.Match(str);
+            var start = BigInteger.Parse(match.Groups["start"].Value);
+            var end = start + BigInteger.Parse(match.Groups["count"].Value) - 1;
+            ranges = ranges.Add(new SeedRange(start, end));
+            str = match.Groups["rest"].Value;
+        }
+        return ranges;
+    }
 }
 
 public record struct Almanac {
-    public ImmutableHashSet<BigInteger> Seeds { get; init; }
+    public ImmutableHashSet<SeedRange> SeedRanges { get; init; }
 
     public Almanac(string text) {
         var lines = text.Split('\n')
@@ -58,10 +72,9 @@ public record struct Almanac {
         LightToTemperature = this.CreateMap("light-to-temperature");
         TemperatureToHumidity = this.CreateMap("temperature-to-humidity");
         HumidityToLocation = this.CreateMap("humidity-to-location");
-        Seeds = lines.First().Split(' ')
-                     .Skip(1)
-                     .Select(BigInteger.Parse)
-                     .ToImmutableHashSet();
+        SeedRanges = lines.First()
+                     .TrimStart("seeds: ".ToCharArray())
+                     .ParseSeedRanges();
     }
 
     internal ImmutableHashSet<AlmanacMap> AlmanacMaps { get; init; }
@@ -95,3 +108,4 @@ public record struct Almanac {
 }
 
 internal record struct AlmanacMap(string MapName, BigInteger SourceStart, BigInteger DestinationStart, BigInteger Count);
+public record struct SeedRange(BigInteger Start, BigInteger End);

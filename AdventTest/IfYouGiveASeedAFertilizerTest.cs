@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Numerics;
+using FluentAssertions;
 using IfYouGiveASeedAFertilizer;
 
 namespace AdventTest {
@@ -37,13 +38,15 @@ namespace AdventTest {
 
         [Fact]
         public static void ComputeNearestSeedLocationFromInputAlmanac() {
-            var almanacText = File.ReadAllText(Path.GetFullPath(InputAlmanacPath));
+            var almanacText = File.ReadAllText(Path.GetFullPath(TestAlmanacPath));
             var almanac = new Almanac(almanacText);
-            // ReSharper disable once UnusedVariable
-            var nearestSeedLocation = almanac.Seeds
-                                             .Select(seed => almanac.GetLocationFor(seed))
-                                             .Min();
-            nearestSeedLocation.Should().Be(177942185);
+            var nearestLocation = almanac.GetLocationFor(almanac.SeedRanges.First().Start);
+            foreach (var seedRange in almanac.SeedRanges) {
+                for (var seed = seedRange.Start; seed <= seedRange.End; seed++) {
+                    nearestLocation = BigInteger.Min(nearestLocation, almanac.GetLocationFor(seed));
+                }
+            }
+            nearestLocation.Should().Be(46);
         }
     }
 }
