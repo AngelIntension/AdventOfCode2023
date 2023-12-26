@@ -30,7 +30,7 @@ public class BoatRaceTest {
     public static void GetWinningCharge_ms_ShouldReturnCorrectNumberOfChargeSpans
         (int race_ms, int record_mm, int expectedCount) {
         var race = new BoatRaceState(race_ms, record_mm);
-        var winningChargeTimes_ms = race.GetWinningCharge_ms();
+        var winningChargeTimes_ms = race.GetWinningCharges_ms();
         winningChargeTimes_ms.Count.Should().Be(expectedCount);
     }
 
@@ -42,7 +42,7 @@ public class BoatRaceTest {
             new(30, 200)
         }.ToImmutableArray();
         var productOfWinningChargeTimeCounts
-            = races.Aggregate(1, (product, race) => product * race.GetWinningCharge_ms().Count);
+            = races.Aggregate(1, (product, race) => product * race.GetWinningCharges_ms().Count);
         productOfWinningChargeTimeCounts.Should().Be(288);
     }
 
@@ -55,7 +55,7 @@ public class BoatRaceTest {
             new(71, 1150)
         }.ToImmutableArray();
         var productOfWinningChargeTimeCounts
-            = races.Aggregate(1, (product, race) => product * race.GetWinningCharge_ms().Count);
+            = races.Aggregate(1, (product, race) => product * race.GetWinningCharges_ms().Count);
         productOfWinningChargeTimeCounts.Should().Be(316800);
     }
     
@@ -63,7 +63,14 @@ public class BoatRaceTest {
     public static void ProductOfWinningCharge_msCounts_GivenGoodKerning_ShouldBeExpected() {
         var races = new BoatRaceState[] { new(71530, 940200) }.ToImmutableArray();
         var productOfWinningChargeTimeCounts
-            = races.Aggregate(1, (product, race) => product * race.GetWinningCharge_ms().Count);
+            = races.Aggregate(1, (product, race) => product * race.GetWinningCharges_ms().Count);
         productOfWinningChargeTimeCounts.Should().Be(71503);
+    }
+
+    [Fact]
+    public static void ComputeCountOfWinningChargeTimes_GivenInputWithGoodKerning() {
+        var race = new BoatRaceState(61677571, 430103613071150);
+        var winningChargeTimeCount = race.GetWinningChargeTimeCount();
+        winningChargeTimeCount.Should().Be(45647654);
     }
 }
