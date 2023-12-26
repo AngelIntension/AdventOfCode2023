@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GearRatio", "GearRatio\Gear
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScratchCards", "ScratchCards\ScratchCards.csproj", "{D26DF5DA-80CE-43A0-8901-293347A6A847}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfYouGiveASeedAFertilizer", "IfYouGiveASeedAFertilizer\IfYouGiveASeedAFertilizer.csproj", "{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IfYouGiveASeedAFertilizer", "IfYouGiveASeedAFertilizer\IfYouGiveASeedAFertilizer.csproj", "{63DA4C14-7F1D-461F-99E6-D5B49DD3E7B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{DBCB2BD8-88B6-4B91-A091-4D9A78CD3178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Console\Console.csproj", "{DBCB2BD8-88B6-4B91-A091-4D9A78CD3178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaitForIt", "WaitForIt\WaitForIt.csproj", "{F34D9DE7-62F1-456F-A427-9F362EF0BC49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{DBCB2BD8-88B6-4B91-A091-4D9A78CD3178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBCB2BD8-88B6-4B91-A091-4D9A78CD3178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBCB2BD8-88B6-4B91-A091-4D9A78CD3178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F34D9DE7-62F1-456F-A427-9F362EF0BC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34D9DE7-62F1-456F-A427-9F362EF0BC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34D9DE7-62F1-456F-A427-9F362EF0BC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34D9DE7-62F1-456F-A427-9F362EF0BC49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

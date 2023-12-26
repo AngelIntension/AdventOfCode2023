@@ -30,6 +30,7 @@
     <ProjectReference Include="..\IfYouGiveASeedAFertilizer\IfYouGiveASeedAFertilizer.csproj" />
     <ProjectReference Include="..\ScratchCards\ScratchCards.csproj" />
     <ProjectReference Include="..\Trebuchet\Trebuchet.csproj" />
+    <ProjectReference Include="..\WaitForIt\WaitForIt.csproj" />
   </ItemGroup>
 
 </Project>
