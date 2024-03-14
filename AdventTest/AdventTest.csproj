@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BagOfCubesGame\BagOfCubesGame.csproj" />
+    <ProjectReference Include="..\CamelCards\CamelCards.csproj" />
     <ProjectReference Include="..\GearRatio\GearRatio.csproj" />
     <ProjectReference Include="..\IfYouGiveASeedAFertilizer\IfYouGiveASeedAFertilizer.csproj" />
     <ProjectReference Include="..\ScratchCards\ScratchCards.csproj" />
