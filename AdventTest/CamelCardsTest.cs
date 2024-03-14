@@ -1,4 +1,4 @@
-﻿using System.Reflection.Metadata;
+﻿using AdventTest.Properties;
 using CamelCards;
 using FluentAssertions;
 
@@ -27,6 +27,13 @@ namespace AdventTest {
         [InlineData("33332", "2AAAA", true)]
         [InlineData("77888", "77788", true)]
         public void Beats_Should_CorrectlyCompareHands(string cards1, string cards2, bool expected) =>
-            new Hand(cards1).Beats(new Hand(cards2)).Should().Be(expected);
+            new Hand(cards1)
+               .Beats(new Hand(cards2))
+               .Should().Be(expected);
+
+        [Fact]
+        public void ComputeWinnings_FromTestData() => Resources.CamelCardsTestData
+                                                               .Winnings()
+                                                               .Should().Be(6440);
     }
 }

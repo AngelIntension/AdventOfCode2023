@@ -1,12 +1,6 @@
 ﻿namespace CamelCards
 {
-    public record Hand {
-        internal string Cards { get; }
-
-        public Hand(string cards) {
-            Cards = cards.ToUpper();
-        }
-    }
+    public record Hand(string Cards);
 
     public static class CamelCards
     {
@@ -34,6 +28,15 @@
                                      .SkipWhile(tuple => tuple.First.Rank() == tuple.Second.Rank())
                                      .First();
             return mismatchedPair.First.Rank() > mismatchedPair.Second.Rank();
+        }
+
+        public static int Winnings(this string data) {
+            var lines = data.Split('\n');
+            return lines.Select(line => (Hand: new Hand(line.Split(' ')[0]), Bid: int.Parse(line.Split(' ')[1])))
+                        .OrderBy(tuple => tuple.Hand,
+                                 Comparer<Hand>.Create((left, right) => left.Beats(right) ? 1 : -1))
+                        .Zip(Enumerable.Range(1, lines.Length))
+                        .Sum(tuple => tuple.First.Bid * tuple.Second);
         }
 
         internal static Group[] GetGroupsByRank(this Hand @this) => (
