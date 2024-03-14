@@ -9,8 +9,6 @@ using CSharpFunctionalExtensions;
 namespace IfYouGiveASeedAFertilizer; 
 
 public static class FarmersAlmanac {
-    public static Regex MapNameRegex => new(@"(?'mapName'\w+-to-\w+)\s+map:");
-
     public static BigInteger GetLocationFor(this Almanac @this, BigInteger seed)
         => Maybe.From(seed)
                 .Map(@this.SeedToSoil)
@@ -21,6 +19,8 @@ public static class FarmersAlmanac {
                 .Map(@this.TemperatureToHumidity)
                 .Map(@this.HumidityToLocation)
                 .Value;
+
+    internal static Regex MapNameRegex => new(@"(?'mapName'\w+-to-\w+)\s+map:");
 
     internal static Func<BigInteger, BigInteger> CreateMap(this Almanac @this, string mapName) {
         var almanacMaps = @this.AlmanacMaps.Where(map => map.MapName == mapName).ToImmutableArray();
@@ -35,11 +35,10 @@ public static class FarmersAlmanac {
                               Some: map => map.DestinationStart + (a - map.SourceStart));
     }
 
-    internal static ImmutableHashSet<string> GetMapNames(this IEnumerable<string> lines) {
-        return lines.Select(line => MapNameRegex.Match(line).Groups["mapName"].Value)
-                    .Where(mapName => mapName != string.Empty)
-                    .ToImmutableHashSet();
-    }
+    internal static ImmutableHashSet<string> GetMapNames(this IEnumerable<string> @this)
+        => @this.Select(line => MapNameRegex.Match(line).Groups["mapName"].Value)
+                .Where(mapName => mapName != string.Empty)
+                .ToImmutableHashSet();
 
     internal static ImmutableHashSet<SeedRange> ParseSeedRanges(this string @this) {
         var seedRangeRegex = new Regex(@"(?'start'\d+)\s+(?'count'\d+)(?'rest'.*)?");
